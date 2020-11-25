@@ -1,0 +1,16 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=01229146_002De80c_002D4d0d_002D901c_002Df2ac44043259/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Create" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::20C4F690-433C-4D3F-A776-F21F5580537D::.NETFramework,Version=v4.7.2::Test.Task1.Create&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::20C4F690-433C-4D3F-A776-F21F5580537D::.NETFramework,Version=v4.7.2::Test.Task1.Add&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::20C4F690-433C-4D3F-A776-F21F5580537D::.NETFramework,Version=v4.7.2::Test.Task1.Delete&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::20C4F690-433C-4D3F-A776-F21F5580537D::.NETFramework,Version=v4.7.2::Test.Task1.FindMultiple&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::20C4F690-433C-4D3F-A776-F21F5580537D::.NETFramework,Version=v4.7.2::Test.Task1.DeleteBranch&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::20C4F690-433C-4D3F-A776-F21F5580537D::.NETFramework,Version=v4.7.2::Test.Task1.MoveBranch&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=326eb13c_002D7798_002D44de_002Da215_002D302a1a023175/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Task1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::20C4F690-433C-4D3F-A776-F21F5580537D::.NETFramework,Version=v4.7.2::Test.Task1&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
