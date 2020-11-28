@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using AlgorithmsDataStructures2;
+using Task1;
 using NUnit.Framework;
 
 namespace Test

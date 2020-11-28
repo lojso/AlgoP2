@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 // https://skillsmart.ru/algo/15-121-cm/z9h53ee284.html
-namespace AlgorithmsDataStructures2
+namespace Task1
 {
     public class SimpleTreeNode<T>
     {
