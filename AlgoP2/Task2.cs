@@ -32,17 +32,14 @@ namespace AlgorithmsDataStructures2
     {
         // null если в дереве вообще нету узлов
         public BSTNode<T> Node;
-
+	
         // true если узел найден
         public bool NodeHasKey;
-
+	
         // true, если родительскому узлу надо добавить новый левым
         public bool ToLeft;
-
-        public BSTFind()
-        {
-            Node = null;
-        }
+	
+        public BSTFind() { Node = null; }
     }
 
     public class BST<T>
@@ -119,11 +116,11 @@ namespace AlgorithmsDataStructures2
             }
 
             return curNode;
-
-            BSTNode<T> GetNextNode(BSTNode<T> node, bool isRight)
-            {
-                return isRight ? node.RightChild : node.LeftChild;
-            }
+        }
+        
+        BSTNode<T> GetNextNode(BSTNode<T> node, bool isRight)
+        {
+            return isRight ? node.RightChild : node.LeftChild;
         }
 
         public bool DeleteNodeByKey(int key)
