@@ -49,7 +49,7 @@
         public BST(BSTNode<T> node)
         {
             Root = node;
-            _count = 0;
+            _count = Root == null ? 0 : 1;
         }
 
         public BSTFind<T> FindNodeByKey(int key)
