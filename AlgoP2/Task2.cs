@@ -1,4 +1,8 @@
-﻿namespace AlgorithmsDataStructures2
+﻿using System;
+using System.Collections.Generic;
+    
+// https://skillsmart.ru/algo/15-121-cm/bcd63523a1.html
+namespace AlgorithmsDataStructures2
 {
     public class BSTNode<T>
     {
