@@ -55,34 +55,33 @@ namespace AlgorithmsDataStructures2
 
         public BSTFind<T> FindNodeByKey(int key)
         {
-            // ищем в дереве узел и сопутствующую информацию по ключу
+            // Ищем в дереве узел и сопутствующую информацию по ключу
             BSTFind<T> result = new BSTFind<T>();
-            result.Node = Root;
-            result.ToLeft = result.Node.NodeKey > key;
-            result.NodeHasKey = result.Node.NodeKey == key;
+            UpdateResult(key, result, Root);
 
             if (Root == null || result.NodeHasKey)
                 return result;
 
-            result.ToLeft = result.Node.NodeKey > key;
-
             var nextNode = result.Node.NodeKey > key ? result.Node.LeftChild : result.Node.RightChild;
-
-
-            // Надо переделать на result.Node.Next
+            
             while (nextNode != null)
             {
-                result.Node = nextNode;
-                result.ToLeft = result.Node.NodeKey > key;
+                result = UpdateResult(key, result, nextNode);
 
                 if (result.Node.NodeKey == key)
-                {
-                    result.NodeHasKey = true;
                     return result;
-                }
 
                 nextNode = result.Node.NodeKey > key ? result.Node.LeftChild : result.Node.RightChild;
             }
+
+            return result;
+        }
+
+        private static BSTFind<T> UpdateResult(int key, BSTFind<T> result, BSTNode<T> nextNode)
+        {
+            result.Node = nextNode;
+            result.ToLeft = result.Node != null && result.Node.NodeKey > key;
+            result.NodeHasKey = result.Node != null && result.Node.NodeKey == key;
 
             return result;
         }
@@ -93,6 +92,13 @@ namespace AlgorithmsDataStructures2
 
             if (findResult.NodeHasKey)
                 return false;
+
+            if (Root == null)
+            {
+                Root = new BSTNode<T>(key, val, null);
+                _count++;
+                return true;
+            }
 
             if (findResult.ToLeft)
             {
@@ -128,10 +134,7 @@ namespace AlgorithmsDataStructures2
             var nodeToDelete = FindNodeByKey(key);
             if (!nodeToDelete.NodeHasKey)
                 return false;
-
-
-
-            // // Ситуации:
+            
             // // Мы хотим удалить лист
             if (nodeToDelete.Node.LeftChild == null && nodeToDelete.Node.RightChild == null)
             {
@@ -144,7 +147,7 @@ namespace AlgorithmsDataStructures2
                     BreakNode(nodeToDelete.Node);
                 }
             }
-            // // // Мы хотим удалить узел с только левым потомком
+            // Мы хотим удалить узел с только левым потомком
             else if (nodeToDelete.Node.LeftChild != null && nodeToDelete.Node.RightChild == null)
             {
                 var insertNode = nodeToDelete.Node.LeftChild;
@@ -159,6 +162,7 @@ namespace AlgorithmsDataStructures2
                     InsertNode(nodeToDelete.Node.Parent, insertNode, nodeToDelete.Node.NodeKey);
                 }
             }
+            // Узел с правым потомком
             else
             {
                 var insertNode = FinMinMax(nodeToDelete.Node.RightChild, false);
@@ -184,7 +188,7 @@ namespace AlgorithmsDataStructures2
             }
 
             _count--;
-            return true; // если узел не найден
+            return true; 
         }
 
         private static void InsertNode(BSTNode<T> ParentNode, BSTNode<T> insertNode, int compareKey)

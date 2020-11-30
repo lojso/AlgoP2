@@ -61,6 +61,19 @@ namespace Test
         }
         
         [Test]
+        public void AddNodeToEmpty()
+        {
+            var rootNode = new BSTNode<int>(78, 0, null);
+            var tree = new BST<int>(null);
+
+            Assert.True(tree.AddKeyValue(15, 0));
+            Assert.True(tree.AddKeyValue(10, 0));
+            Assert.True(tree.AddKeyValue(25, 0));
+            
+            Assert.True(tree.Count() == 3);
+        }
+        
+        [Test]
         public void FindMaxRootNode()
         {
             var rootNode = new BSTNode<int>(8, 0, null);
