@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-    
-// https://skillsmart.ru/algo/15-121-cm/bcd63523a1.html
-namespace Task2
+using System.Data.Common;
+
+// https://skillsmart.ru/algo/15-121-cm/l30fe7fa1c.html
+namespace Task3
 {
     public class BSTNode<T>
     {
@@ -51,6 +52,86 @@ namespace Task2
         {
             Root = node;
             _count = Root == null ? 0 : 1;
+        }
+
+        public List<BSTNode<T>> WideAllNodes()
+        {
+            var nodes = new List<BSTNode<T>>();
+            if (Root == null)
+                return nodes;
+            var queue = new Queue<BSTNode<T>>();
+            queue.Enqueue(Root);
+            while (queue.Count > 0)
+            {
+                var currentNode = queue.Dequeue();
+                nodes.Add(currentNode);
+
+                if (currentNode.LeftChild != null)
+                {
+                    queue.Enqueue(currentNode.LeftChild);
+                }
+
+                if (currentNode.RightChild != null)
+                {
+                    queue.Enqueue(currentNode.RightChild);
+                }
+            }
+
+            return nodes;
+        }
+        
+        public List<BSTNode<T>> DeepAllNodes(int iterationType)
+        {
+            List<BSTNode<T>> nodes = new List<BSTNode<T>>();
+            DeepAllNodes(Root, iterationType, nodes);
+            return nodes;
+        }
+        
+        public void DeepAllNodes(BSTNode<T> currentNode, int iterationType, List<BSTNode<T>> nodes)
+        {
+            DFSStep(currentNode, GetBranch(iterationType, 0), iterationType, nodes);
+            DFSStep(currentNode, GetBranch(iterationType, 1), iterationType, nodes);
+            DFSStep(currentNode, GetBranch(iterationType, 2), iterationType, nodes);
+        }
+
+        private void DFSStep(BSTNode<T> currentNode, Branch branch, int iterationType, List<BSTNode<T>> nodes)
+        {
+            switch (branch)
+            {
+                case Branch.Left:
+                    if (currentNode.LeftChild != null)
+                        DeepAllNodes(currentNode.LeftChild, iterationType, nodes);
+                    break;
+                case Branch.Current:
+                    nodes.Add(currentNode);
+                    break;
+                case Branch.Right:
+                    if (currentNode.RightChild != null)
+                        DeepAllNodes(currentNode.RightChild, iterationType, nodes);
+                    break;
+            }
+        }
+
+        private Branch GetBranch(int iterationType, int step)
+        {
+            if ((iterationType == 0 && step == 0) ||
+                (iterationType == 1 && step == 0) ||
+                (iterationType == 2 && step == 1))
+                return Branch.Left;
+
+            if ((iterationType == 0 && step == 2) ||
+                (iterationType == 1 && step == 1) ||
+                (iterationType == 2 && step == 2))
+                return Branch.Right;
+
+            return Branch.Current;
+        }
+
+        private enum Branch
+        {
+            Left,
+            Current,
+            Right
         }
 
         public BSTFind<T> FindNodeByKey(int key)
@@ -135,7 +216,7 @@ namespace Task2
             if (!nodeToDelete.NodeHasKey)
                 return false;
             
-            // // Мы хотим удалить лист
+            // Мы хотим удалить лист
             if (nodeToDelete.Node.LeftChild == null && nodeToDelete.Node.RightChild == null)
             {
                 if (nodeToDelete.Node.Parent == null)

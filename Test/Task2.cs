@@ -1,4 +1,4 @@
-﻿using AlgorithmsDataStructures2;
+﻿using Task3;
 using NUnit.Framework;
 
 namespace Test
