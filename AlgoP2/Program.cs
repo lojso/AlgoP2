@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Task3;
-using Task1;
+using AlgorithmsDataStructures2;
 
 namespace AlgoP2
 {
