@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Collections.Generic;
 
-// https://skillsmart.ru/algo/15-121-cm/l30fe7fa1c.html
 namespace Task3
 {
     public class BSTNode<T>
