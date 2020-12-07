@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AlgorithmsDataStructures2;
+using Task3;
 
 namespace AlgoP2
 {
@@ -8,18 +9,15 @@ namespace AlgoP2
     {
         public static void Main(string[] args)
         {
-            BSTNode<int> root = new BSTNode<int>(15, 0, null);
-            BST<int> tree = new BST<int>(root);
+            aBST atree = new aBST(2);
 
-            tree.AddKeyValue(10,0);
-            tree.AddKeyValue(20,0);
-            tree.AddKeyValue(5,0);
-            tree.AddKeyValue(13,0);
-            tree.AddKeyValue(18,0);
-            tree.AddKeyValue(25,0);
+            atree.AddKey(15);
+            //atree.AddKey(10);
+            atree.AddKey(20);
+            atree.AddKey(17);
+            atree.AddKey(25);
 
-            tree.DeepAllNodes(0);
-            Console.WriteLine(ListToStr(tree.DeepAllNodes(1)));
+            Console.WriteLine("fin");
         }
 
         private static string ListToStr(List<BSTNode<int>> deepAllNodes)
@@ -33,7 +31,5 @@ namespace AlgoP2
 
             return result.Trim();
         }
-        
-        
     }
 }

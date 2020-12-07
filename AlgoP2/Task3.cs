@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AlgorithmsDataStructures2
+namespace Task3
 {
     public class BSTNode<T>
     {
