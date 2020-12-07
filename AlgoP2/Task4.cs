@@ -46,6 +46,10 @@ namespace AlgorithmsDataStructures2
         {
             // добавляем ключ в массив
             var insertIndex = FindKeyIndex(key);
+
+            if (insertIndex.HasValue && insertIndex >= 0 && Tree[insertIndex.Value] == key)
+                return insertIndex.Value;
+            
             if(!insertIndex.HasValue || insertIndex > 0)
                 return -1;
 

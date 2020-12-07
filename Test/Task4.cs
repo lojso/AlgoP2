@@ -43,6 +43,12 @@ namespace Test
             Assert.True(tree.AddKey(17) == 5);
             Assert.True(tree.AddKey(11) == -1);
             
+            Assert.True(tree.AddKey(10) == 1);
+            Assert.True(tree.AddKey(15) == 0);
+            Assert.True(tree.AddKey(20) == 2);
+            Assert.True(tree.AddKey(12) == 4);
+            Assert.True(tree.AddKey(17) == 5);
+            
             Assert.True(tree.FindKeyIndex(15) == 0);
             Assert.True(tree.FindKeyIndex(11) == null);
             Assert.True(tree.FindKeyIndex(5) == -3);
