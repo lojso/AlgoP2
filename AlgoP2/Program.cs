@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AlgorithmsDataStructures2;
+using Task4;
 using Task3;
 
 namespace AlgoP2
@@ -9,13 +10,9 @@ namespace AlgoP2
     {
         public static void Main(string[] args)
         {
-            aBST atree = new aBST(2);
+            var a = new[] {15, 8, 20, 4, 12, 25};
 
-            atree.AddKey(15);
-            //atree.AddKey(10);
-            atree.AddKey(20);
-            atree.AddKey(17);
-            atree.AddKey(25);
+            var bTree = BalancedBST.GenerateBBSTArray(a);
 
             Console.WriteLine("fin");
         }

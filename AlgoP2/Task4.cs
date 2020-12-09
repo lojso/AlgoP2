@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AlgorithmsDataStructures2
+namespace Task4
 {
     public class aBST
     {
