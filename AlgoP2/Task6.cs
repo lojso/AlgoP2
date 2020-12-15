@@ -9,8 +9,8 @@ namespace AlgorithmsDataStructures2
         public BSTNode Parent; // родитель или null для корня
         public BSTNode LeftChild; // левый потомок
         public BSTNode RightChild; // правый потомок	
-        public int     Level; // глубина узла
-	
+        public int Level; // глубина узла
+
         public BSTNode(int key, BSTNode parent)
         {
             NodeKey = key;
@@ -18,32 +18,32 @@ namespace AlgorithmsDataStructures2
             LeftChild = null;
             RightChild = null;
         }
-    }	
-    
+    }
+
     public class BalancedBST
     {
         public BSTNode Root; // корень дерева
-	
-        public BalancedBST() 
-        { 
+
+        public BalancedBST()
+        {
             Root = null;
         }
-		
-        public void GenerateTree(int[] a) 
-        {  
+
+        public void GenerateTree(int[] a)
+        {
             Array.Sort(a);
             int startIndex = 0;
             int endIndex = a.Length;
             int centerIndex = startIndex + (int) Math.Floor((endIndex - startIndex) / 2f);
             Root = new BSTNode(a[centerIndex], null);
             Root.Level = 0;
-            
+
             if (startIndex == centerIndex)
                 return;
 
             AddNode(a, startIndex, centerIndex, true, Root);
-            
-            if(centerIndex + 1 < endIndex)
+
+            if (centerIndex + 1 < endIndex)
                 AddNode(a, centerIndex + 1, endIndex, false, Root);
         }
 
@@ -55,13 +55,13 @@ namespace AlgorithmsDataStructures2
             node.Level = parent.Level + 1;
 
             AddToParent(isLeftNode, parent, node);
-            
+
             if (startIndex == centerIndex)
                 return;
-            
+
             AddNode(array, startIndex, centerIndex, true, node);
-            
-            if(centerIndex + 1 < endIndex)
+
+            if (centerIndex + 1 < endIndex)
                 AddNode(array, centerIndex + 1, endIndex, false, node);
         }
 
@@ -69,7 +69,7 @@ namespace AlgorithmsDataStructures2
         {
             if (parent == null)
                 return;
-            
+
             if (isLeftNode)
             {
                 parent.LeftChild = node;
@@ -80,9 +80,52 @@ namespace AlgorithmsDataStructures2
             }
         }
 
-        public bool IsBalanced(BSTNode root_node) 
-        {  
-            return false; // сбалансировано ли дерево с корнем root_node
+        public bool IsBalanced(BSTNode root_node)
+        {
+            return IsBalancedRec(root_node).IsBalanced;
+        }
+
+        private IsBalancedContext IsBalancedRec(BSTNode root_node)
+        {
+            IsBalancedContext leftResult = IsSubtreeBalanced(root_node.LeftChild);
+            IsBalancedContext rightResult = IsSubtreeBalanced(root_node.RightChild);
+
+            return new IsBalancedContext
+            {
+                Depth = Math.Max(leftResult.Depth, rightResult.Depth) + 1,
+                IsBalanced = Math.Abs(leftResult.Depth - rightResult.Depth) <= 1 &&
+                             leftResult.IsBalanced && rightResult.IsBalanced,
+            };
+        }
+
+        private IsBalancedContext IsSubtreeBalanced(BSTNode node)
+        {
+            return node == null
+                ? new IsBalancedContext()
+                {
+                    Depth = 0,
+                    IsBalanced = true,
+                }
+                : IsBalancedRec(node);
+        }
+
+        private struct IsBalancedContext
+        {
+            public int Depth;
+            public bool IsBalanced;
+        }
+
+        public static void AddNodeDebug(BSTNode parent, BSTNode node, bool toLeft)
+        {
+            if (toLeft)
+            {
+                parent.LeftChild = node;
+            }
+            else
+            {
+                parent.RightChild = node;
+            }
+            node.Parent = parent;
         }
     }
 }
