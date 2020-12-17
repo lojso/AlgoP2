@@ -36,7 +36,7 @@ namespace AlgorithmsDataStructures2
             int endIndex = a.Length;
             int centerIndex = startIndex + (int) Math.Floor((endIndex - startIndex) / 2f);
             Root = new BSTNode(a[centerIndex], null);
-            Root.Level = 0;
+            Root.Level = 1;
 
             if (startIndex == centerIndex)
                 return;
