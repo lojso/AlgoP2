@@ -26,6 +26,11 @@ namespace AlgorithmsDataStructures2
             {
                 HeapArray[index] = -1;
             }
+
+            foreach (var elem in a)
+            {
+                Add(elem);
+            }
         }
 
         private int SumOfPowersRec(int depth)
