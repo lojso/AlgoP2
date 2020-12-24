@@ -67,7 +67,7 @@ namespace AlgorithmsDataStructures2
             
             RecalculateAfterInsertion(lastEmptyIndex);
 
-            return true; // если куча вся заполнена
+            return true;
         }
 
         private void RecalculateLevelAfterDeletion(int activeNodeIndex, int currentDepth)
@@ -150,9 +150,12 @@ namespace AlgorithmsDataStructures2
         
         private int GetLastEmptyIndex()
         {
-            for (var i = HeapArray.Length - 1; i >= 0; i--)
+            if (HeapArray[0] == -1)
+                return 0;
+            
+            for (var i = HeapArray.Length - 1; i >= 1; i--)
             {
-                if (HeapArray[i] == -1)
+                if (HeapArray[i-1] != -1 && HeapArray[i] == -1)
                     return i;
             }
 
