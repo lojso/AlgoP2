@@ -17,9 +17,11 @@ namespace AlgorithmsDataStructures2
         public Vertex [] vertex;
         public int [,] m_adjacency;
         public int max_vertex;
-	
+        private int _size;
+
         public SimpleGraph(int size)
         {
+            _size = size;
             max_vertex = size;
             m_adjacency = new int [size,size];
             vertex = new Vertex [size];
@@ -27,7 +29,14 @@ namespace AlgorithmsDataStructures2
 	
         public void AddVertex(int value)
         {
-            vertex[value] = new Vertex(value);
+            for (var i = 0; i < vertex.Length; i++)
+            {
+                if (vertex[i] == null)
+                {
+                    vertex[i] = new Vertex(value);
+                    return;
+                }
+            }
         }
 
         // здесь и далее, параметры v -- индекс вершины
@@ -35,6 +44,15 @@ namespace AlgorithmsDataStructures2
         public void RemoveVertex(int v)
         {
             vertex[v] = null;
+            for (int i = 0; i < _size; i++)
+            {
+                if (m_adjacency[v, i] != 0)
+                {
+                    m_adjacency[v, i] = 0;
+                    m_adjacency[i, v] = 0;
+                }
+            }
+
             // ваш код удаления вершины со всеми её рёбрами
         }
 	
