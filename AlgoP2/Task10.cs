@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Task9
+namespace AlgorithmsDataStructures2
 {
-    public class Vertex
+    public class Vertex<T>
     {
-        public int Value;
-        public Vertex(int val)
+        public bool Hit;
+        public T Value;
+
+        public Vertex(T val)
         {
             Value = val;
+            Hit = false;
         }
     }
-  
-    public class SimpleGraph
+
+    public class SimpleGraph<T>
     {
-        public Vertex [] vertex;
+        public Vertex<T> [] vertex;
         public int [,] m_adjacency;
         public int max_vertex;
         private int _size;
@@ -24,16 +27,16 @@ namespace Task9
             _size = size;
             max_vertex = size;
             m_adjacency = new int [size,size];
-            vertex = new Vertex [size];
+            vertex = new Vertex<T> [size];
         }
 	
-        public void AddVertex(int value)
+        public void AddVertex(T value)
         {
             for (var i = 0; i < vertex.Length; i++)
             {
                 if (vertex[i] == null)
                 {
-                    vertex[i] = new Vertex(value);
+                    vertex[i] = new Vertex<T>(value);
                     return;
                 }
             }
@@ -75,5 +78,14 @@ namespace Task9
             m_adjacency[v2, v1] = 0;
             // удаление ребра между вершинами v1 и v2
         }
+
+        public List<Vertex<T>> DepthFirstSearch(int VFrom, int VTo)
+        {
+            // Узлы задаются позициями в списке vertex.
+            // Возвращается список узлов -- путь из VFrom в VTo.
+            // Список пустой, если пути нету.
+            return null;
+        }
+
     }
 }
