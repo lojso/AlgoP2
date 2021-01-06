@@ -55,27 +55,7 @@ namespace AlgorithmsDataStructures2
 
         public List<SimpleTreeNode<T>> GetAllNodes()
         {
-            var nodes = new List<SimpleTreeNode<T>>();
-            if (Root == null)
-                return nodes;
-            var queue = new Queue<SimpleTreeNode<T>>();
-            queue.Enqueue(Root);
-            while (queue.Count > 0)
-            {
-                var currentNode = queue.Dequeue();
-                nodes.Add(currentNode);
-
-
-                if (currentNode.Children == null)
-                    continue;
-
-                foreach (var node in currentNode.Children)
-                {
-                    queue.Enqueue(node);
-                }
-            }
-
-            return nodes;
+            return GetAllNodes(Root);
         }
 
         public List<SimpleTreeNode<T>> FindNodesByValue(T val)
@@ -117,7 +97,7 @@ namespace AlgorithmsDataStructures2
 
         public int Count()
         {
-            return GetAllNodes().Count;
+            return GetAllNodes(Root).Count;
         }
 
         public int LeafCount()
@@ -154,8 +134,61 @@ namespace AlgorithmsDataStructures2
         
         public List<T> EvenTrees()
         {
-            // ...
-            return null;
+            List<T> cutNodes = new List<T>();
+            var allNodes = GetAllNodes(Root);
+            foreach (var node in allNodes)
+            {
+                if (ShoudCut(node))
+                    AddNodeToCutNodes(node, cutNodes);
+            }
+            return cutNodes;
+        }
+
+        private void AddNodeToCutNodes(SimpleTreeNode<T> node, List<T> cutNodes)
+        {
+            cutNodes.Add(node.Parent.NodeValue);
+            cutNodes.Add(node.NodeValue);
+        }
+
+        private bool ShoudCut(SimpleTreeNode<T> node)
+        {
+            if (node == null)
+                return false;
+
+            if (node.Parent == null)
+                return false;
+
+            return IsEven(node);
+        }
+
+        public bool IsEven(SimpleTreeNode<T> node)
+        {
+            return GetAllNodes(node).Count % 2 == 0;
+        }
+        
+        public List<SimpleTreeNode<T>> GetAllNodes(SimpleTreeNode<T> root)
+        {
+            var nodes = new List<SimpleTreeNode<T>>();
+            if (root == null)
+                return nodes;
+            var queue = new Queue<SimpleTreeNode<T>>();
+            queue.Enqueue(root);
+            while (queue.Count > 0)
+            {
+                var currentNode = queue.Dequeue();
+                nodes.Add(currentNode);
+
+
+                if (currentNode.Children == null)
+                    continue;
+
+                foreach (var node in currentNode.Children)
+                {
+                    queue.Enqueue(node);
+                }
+            }
+
+            return nodes;
         }
     }
 }
