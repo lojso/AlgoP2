@@ -78,14 +78,111 @@ namespace AlgorithmsDataStructures2
             m_adjacency[v2, v1] = 0;
             // удаление ребра между вершинами v1 и v2
         }
-
+        
         public List<Vertex<T>> DepthFirstSearch(int VFrom, int VTo)
         {
+            ClearVisited();
+            Stack<int> path = new Stack<int>();
+            var currNode = VFrom;
+
+            do
+            {
+                SetVisited(currNode);
+                path.Push(currNode);
+
+                if (currNode == VTo)
+                {
+                    path.Push(currNode);
+                    return StackToList(path);
+                }
+
+                while (path.Count > 0)
+                {
+                    currNode = path.Peek();
+                    var neighbours = GetUnvisitedNeighboursIndexes(currNode);
+                    if (neighbours.Count > 0)
+                    {
+                        if (neighbours.Contains(VTo))
+                        {
+                            path.Push(VTo);
+                            return StackToList(path);
+                        }
+
+                        currNode = neighbours[0];
+                        break;
+                    }
+
+                    path.Pop();
+                }
+            } while (path.Count > 0);
+
+            return new List<Vertex<T>>();
+
             // Узлы задаются позициями в списке vertex.
             // Возвращается список узлов -- путь из VFrom в VTo.
             // Список пустой, если пути нету.
-            return null;
         }
 
+        // private void DFS(int currentNodeIndex, int targetNodeIndex, Stack<int> dfsStack)
+        // {
+        //     SetVisited(currentNodeIndex);
+        // }
+
+        private void ClearVisited()
+        {
+            foreach (var vertexNode in vertex)
+            {
+                vertexNode.Hit = false;
+            }
+        }
+
+        private bool IsVisited(int nodeIndex)
+        {
+            return vertex[nodeIndex].Hit;
+        }
+
+        private void SetVisited(int nodeIndex)
+        {
+            vertex[nodeIndex].Hit = true;
+        }
+
+        private List<Vertex<T>> StackToList(Stack<int> dfsStack)
+        {
+            var result = new List<Vertex<T>>();
+            while (dfsStack.Count > 0)
+            {
+                result.Add(vertex[dfsStack.Pop()]);
+            }
+
+            result.Reverse();
+            return result;
+        }
+
+        private List<int> GetUnvisitedNeighboursIndexes(int vFrom)
+        {
+            var result = new List<int>();
+            var neighboursIndexes = GetNeighboursIndexes(vFrom);
+            
+            foreach (var neighbour in neighboursIndexes)
+            {
+                if(vertex[neighbour].Hit != true)
+                    result.Add(neighbour);
+            }
+
+            return result;
+        }
+
+        private List<int> GetNeighboursIndexes(int nodeIndex)
+        {
+            var result = new List<int>();
+            
+            for (int i = 0; i < _size; i++)
+            {
+                if (m_adjacency[nodeIndex, i] != 0) 
+                    result.Add(i);
+            }
+
+            return result;
+        }
     }
 }
