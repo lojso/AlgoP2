@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
-namespace Task10
+namespace AlgorithmsDataStructures2
 {
     public class Vertex<T>
     {
@@ -121,6 +122,71 @@ namespace Task10
             // Узлы задаются позициями в списке vertex.
             // Возвращается список узлов -- путь из VFrom в VTo.
             // Список пустой, если пути нету.
+        }
+        
+        public List<Vertex<T>> BreadthFirstSearch(int VFrom, int VTo)
+        {
+            // узлы задаются позициями в списке vertex.
+            // возвращает список узлов -- путь из VFrom в VTo
+            // или пустой список, если пути нету
+            ClearVisited();
+            Queue<int> q = new Queue<int>();
+            q.Enqueue(VFrom);
+            int[] path = new int[vertex.Length];
+            for (var index = 0; index < path.Length; index++)
+            {
+                path[index] = -1;
+            }
+
+            while (q.Count > 0)
+            {
+                var curNode = q.Dequeue();
+                SetVisited(curNode);
+                var neighbours = GetUnvisitedNeighboursIndexes(curNode);
+                foreach (var neighbour in neighbours)
+                {
+                    if(q.Contains(neighbour) == false)
+                    {
+                        q.Enqueue(neighbour);
+                        path[neighbour] = curNode;
+                    }
+                }
+            }
+
+            return ReconstructPath(VFrom, VTo, path);
+        }
+
+        private List<Vertex<T>> ReconstructPath(int from, int to, int[] path)
+        {
+            List<int> reconstructedPath = new List<int>();
+            for (int curNode = to; curNode != -1; curNode = path[curNode])
+            {
+                reconstructedPath.Add(curNode);
+            }
+            
+            if(reconstructedPath.Count == 0)
+                return new List<Vertex<T>>();
+            
+            if(reconstructedPath[0] == -1)
+                return new List<Vertex<T>>();
+
+            if (reconstructedPath[0] != to || reconstructedPath[reconstructedPath.Count - 1] != from)
+                return new List<Vertex<T>>();
+
+            return BuildVertextList(reconstructedPath);
+
+
+        }
+
+        private List<Vertex<T>> BuildVertextList(List<int> reconstructedPath)
+        {
+            var vertexses = new List<Vertex<T>>();
+            for (var i = reconstructedPath.Count - 1; i >= 0; i--)
+            {
+                vertexses.Add(vertex[reconstructedPath[i]]);
+            }
+
+            return vertexses;
         }
 
         private void ClearVisited()
