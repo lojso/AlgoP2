@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace AlgorithmsDataStructures2
+namespace Task11
 {
     public class Vertex<T>
     {
